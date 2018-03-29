@@ -11,5 +11,6 @@
     "mocha": "^5.0.4"
   },
   "dependencies": {
+    "binary-file": "gitlab:ice-spear-tools/binary-file"
   }
 }
