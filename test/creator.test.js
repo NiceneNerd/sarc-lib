@@ -40,7 +40,7 @@ describe('Creator', () =>
     { 
         if(fs.existsSync("./config.json"))
         {
-            const config = JSON.parse(fs.readFileSync("./config.json"));
+            const config = JSON.parse(fs.readFileSync(__dirname + "/../config.json"));
 
             it('parse and re-create real file', async () =>
             {   
