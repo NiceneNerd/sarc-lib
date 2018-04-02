@@ -14,7 +14,7 @@ module.exports = class Parser
     {
         this.sarc = sarc;
         this.fileLoader = new Binary_File.Loader();
-        this.headerStructure = JSON.parse(fs.readFileSync("./src/header.json"));
+        this.headerStructure = JSON.parse(fs.readFileSync(__dirname + "/header.json"));
 
         this.header = null;
         this.buffer = null;
@@ -28,7 +28,7 @@ module.exports = class Parser
         this.header = this.parser.parse(this.headerStructure); // @TODO handle file flags with diffrent name offset
 
         const sfat = this.header.sfat;
-        
+
         for(let name of sfat.fileNames)
             this.fileNames.set(stringHash.hash(name, sfat.hashMulti), name);
 

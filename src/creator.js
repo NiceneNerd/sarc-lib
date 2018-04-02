@@ -16,7 +16,7 @@ module.exports = class Creator
         this.ENTRY_SIZE = 0x10;
 
         this.sarc = sarc;
-        this.headerStructure = JSON.parse(fs.readFileSync("./src/header.json"));
+        this.headerStructure = JSON.parse(fs.readFileSync(__dirname + "/header.json"));
         delete this.headerStructure.sfat;
 
         this.fileNames = new Map();
