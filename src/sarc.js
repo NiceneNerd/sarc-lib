@@ -75,12 +75,6 @@ module.exports = class SARC
 
     async _extractSubFile(fullPath, entry)
     {
-        let rawMagic = entry.data.slice(0,4).toString("utf8");
-        if(rawMagic == "Yaz0")
-        {
-            fs.writeFileSync(fullPath + ".unpacked.bin", this.fileLoader.buffer(entry.data));
-        }
-
         try{
             let magic = this.fileLoader.getMagic(entry.data);
             if(magic == "SARC")
