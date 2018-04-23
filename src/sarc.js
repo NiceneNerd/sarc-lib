@@ -11,6 +11,7 @@ const Binary_File  = require('binary-file');
 const Model  = require("./entry.js");
 const Parser = require("./parser.js");
 const Creator = require("./creator.js");
+const DirScanner = require("./dirScanner.js");
 
 module.exports = class SARC
 {
@@ -18,6 +19,7 @@ module.exports = class SARC
     {
         this.entries = new Map();
         this.fileLoader = new Binary_File.Loader();
+        this.SUFFIX_UNPACKED = ".unpacked";
     }
 
     addFile(name, data)
@@ -48,6 +50,12 @@ module.exports = class SARC
     async save(sarcPath)
     {
         await fs.writeFile(sarcPath, this.create());
+    }
+
+    async fromDirectory(dirPath, recursive = true, useYaz0 = true)
+    {
+        const dirScanner = new DirScanner(this, dirPath, recursive, useYaz0);
+        return dirScanner.scan(dirPath);
     }
 
     async extractFiles(outputPath, recursive = false)
@@ -81,7 +89,7 @@ module.exports = class SARC
             {
                 let sarc = new SARC();
                 sarc.parse(this.fileLoader.buffer(entry.data));
-                await sarc.extractFiles(path.join(fullPath + ".unpacked"), true);
+                await sarc.extractFiles(path.join(fullPath + this.SUFFIX_UNPACKED), true);
             }
         }catch(e)
         {
