@@ -95,17 +95,10 @@ describe('DirScanner', () =>
         if(fs.existsSync("./config.json"))
         {
             const config = JSON.parse(fs.readFileSync(__dirname + "/../config.json"));
-/*
-            const packNums = [59, 60]; // implement buffer resizing!
-            for(let packNum of packNums)
-            {
-                packNum = `${packNum}`.padStart(3, "0");
-                it(`parse and re-create real file (Dungeon${packNum}.pack)`, async () => await testSarcPack(config, `Dungeon${packNum}.pack`));
-            }
-*/
+
             for(let i=0; i<120; ++i) {
                 const packNum = `${i}`.padStart(3, "0");
-                it(`parse and re-create real file (Dungeon${packNum}.pack)`, async () => await testSarcPack(config, `Dungeon${packNum}.pack`));
+                it(`parse and re-create a real file (Dungeon${packNum}.pack)`, async () => await testSarcPack(config, `Dungeon${packNum}.pack`));
             } 
 
         }else{
