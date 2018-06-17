@@ -24,6 +24,7 @@ module.exports = class SARC
 
     addFile(name, data)
     {
+        name = name.replace(/\\+/g, "/");
         this.entries.set(name, (new Model(name, data)));
     }
 

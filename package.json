@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "binary-file": "gitlab:ice-spear-tools/binary-file",
-    "yaz0-lib": "gitlab:ice-spear-tools/yaz0-lib",
     "fs-extra": "^5.0.0",
-    "int32": "^2.5.5"
+    "overflow-js": "^1.0.0",
+    "yaz0-lib": "gitlab:ice-spear-tools/yaz0-lib"
   }
 }
