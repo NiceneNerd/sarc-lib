@@ -1,5 +1,6 @@
 # Local configs
 /config.json
+test/data/tmp
 
 # Installed node packages
 node_modules/

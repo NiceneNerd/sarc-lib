@@ -26,16 +26,21 @@ async function testSarcPack(config, packName)
     const sarcOrg = new SARC();
     const parserOrg = new Parser(sarcOrg);
     parserOrg.parse(testPackPath);
-    await sarcOrg.extractFiles(tempPath, true);
+    await sarcOrg.extractFiles(tempPath, false);
 
     // re-create file
     const sarcCreate = new SARC();
-    const dirScanner = new DirScanner(sarcCreate, tempPath, true, false);
+    const dirScanner = new DirScanner(sarcCreate, tempPath, true, true);
     await dirScanner.scan(tempPath);
-    
-    const createdBuffer = sarcCreate.create();
 
+    const createdBuffer = sarcCreate.create();
     await fs.remove(tempPath);
+
+    // binary diff between original and new
+    const orgBuffer = fileLoader.buffer(testPackPath);
+
+    expect(createdBuffer.length).equal(orgBuffer.length); // length
+    expect(createdBuffer.compare(orgBuffer)).equal(0); // byte-by-byte
 
     // parse re-created file
     const sarcTest = new SARC();
@@ -44,6 +49,11 @@ async function testSarcPack(config, packName)
 
     // same file count
     expect(sarcOrg.entries.size).deep.equal(sarcTest.entries.size);
+
+    // same file-table order
+    const fileTableOrg = [...sarcOrg.entries.keys()];
+    const fileTableNew = [...sarcTest.entries.keys()];
+    expect(fileTableNew).deep.equal(fileTableOrg);
 
     // same file names and content
     for(const [,entry] of sarcTest.entries) 

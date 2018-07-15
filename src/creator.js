@@ -6,7 +6,7 @@
 
 const fs = require('fs-extra');
 const Binary_File  = require('binary-file');
-const hash = require("./stringHash").hash;
+const {hash} = require("./stringHash");
 
 module.exports = class Creator
 {
@@ -32,7 +32,10 @@ module.exports = class Creator
     _sortEntries(entries)
     {
         return new Map([...entries].sort((a,b) => {
-            return hash(a[0]) > hash(b[0]);
+            if(a[0] == b[0])
+                return 0;
+
+            return hash(a[0]) > hash(b[0]) ? 1 : -1;
         }));
     }
 
