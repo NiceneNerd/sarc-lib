@@ -1,6 +1,6 @@
 {
   "name": "sarc-lib",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "license": "GPL-3.0",
   "main": "index.js",
   "scripts": {
@@ -11,9 +11,9 @@
     "mocha": "^5.0.4"
   },
   "dependencies": {
-    "binary-file": "gitlab:ice-spear-tools/binary-file",
+    "binary-file": "https://gitlab.com/ice-spear-tools/binary-file/-/archive/master/binary-file-master.tar",
     "fs-extra": "^5.0.0",
     "overflow-js": "^1.0.0",
-    "yaz0-lib": "gitlab:ice-spear-tools/yaz0-lib"
+    "yaz0-lib": "https://gitlab.com/ice-spear-tools/yaz0-lib/-/archive/master/yaz0-lib-master.tar"
   }
 }
